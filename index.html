@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Quest Kids 🚀</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Fuente infantil moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== HEADER GLOBAL ===================== -->
+  <header id="appHeader" class="app-header hidden">
+    <div class="brand" onclick="Router.go('dashboard')">
+      <span class="brand-logo">🚀</span>
+      <span class="brand-name">English Quest <b>Kids</b></span>
+    </div>
+    <div class="header-stats">
+      <span class="hstat">⭐ <b id="hStars">0</b></span>
+      <span class="hstat">🪙 <b id="hCoins">0</b></span>
+      <span class="hstat">🔥 <b id="hStreak">0</b></span>
+      <span class="hstat level-badge" id="hLevel">Pre-A1</span>
+    </div>
+  </header>
+
+  <!-- ===================== PANTALLA 1: LANDING ===================== -->
+  <section id="screen-landing" class="screen active">
+    <div class="landing-wrap">
+      <div class="floating-shapes">
+        <span class="shape s1">🦊</span>
+        <span class="shape s2">🐼</span>
+        <span class="shape s3">🦉</span>
+        <span class="shape s4">🐸</span>
+        <span class="shape s5">⭐</span>
+        <span class="shape s6">🎈</span>
+      </div>
+
+      <div class="landing-card pop-in">
+        <div class="landing-logo">🚀</div>
+        <h1 class="landing-title">English Quest <span>Kids</span></h1>
+        <p class="landing-sub">¡Aprende inglés jugando y conviértete en un héroe del idioma! 🌟</p>
+
+        <div class="landing-form">
+          <input id="inputName" class="kid-input" type="text" placeholder="¿Cómo te llamas? 😊" maxlength="20" />
+          <input id="inputAge" class="kid-input" type="number" placeholder="¿Cuántos años tienes?" min="4" max="16" />
+        </div>
+
+        <button class="btn-primary btn-big bounce" onclick="App.startEvaluation()">
+          🎯 Comenzar evaluación
+        </button>
+
+        <div class="landing-features">
+          <div class="feat">🎧 Listening</div>
+          <div class="feat">📚 Vocabulary</div>
+          <div class="feat">✏️ Grammar</div>
+          <div class="feat">📖 Reading</div>
+          <div class="feat">🎤 Speaking</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA 2: TEST ===================== -->
+  <section id="screen-test" class="screen">
+    <div class="test-container">
+      <div class="test-topbar">
+        <button class="btn-ghost" onclick="App.confirmExit()">✕</button>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <span class="q-counter"><b id="qCurrent">1</b>/<span id="qTotal">0</span></span>
+      </div>
+
+      <div id="questionArea" class="question-area">
+        <!-- Generado dinámicamente -->
+      </div>
+
+      <div class="test-footer">
+        <span id="sectionTag" class="section-tag">🎧 Listening</span>
+        <button id="btnNext" class="btn-primary" onclick="Test.submitAnswer()" disabled>Comprobar ✓</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA 3: REPORTE ===================== -->
+  <section id="screen-report" class="screen">
+    <div class="report-wrap">
+      <div class="report-card pop-in">
+        <div class="report-emoji" id="reportEmoji">🎉</div>
+        <h2 class="report-title">¡Evaluación completada!</h2>
+        <p class="report-name" id="reportGreeting"></p>
+
+        <div class="level-result">
+          <span class="level-label">Tu nivel es</span>
+          <div class="level-big" id="reportLevel">A1</div>
+          <span class="level-desc" id="reportLevelDesc"></span>
+        </div>
+
+        <div class="global-score">
+          <div class="score-ring">
+            <span id="reportGlobal">0%</span>
+          </div>
+          <span>Puntaje global</span>
+        </div>
+
+        <h3 class="report-subtitle">📊 Tus competencias</h3>
+        <div id="competencyBars" class="competency-bars"></div>
+
+        <div class="strengths-weak">
+          <div class="sw-box strengths">
+            <h4>💪 Fortalezas</h4>
+            <ul id="strengthsList"></ul>
+          </div>
+          <div class="sw-box weaknesses">
+            <h4>🎯 A mejorar</h4>
+            <ul id="weaknessesList"></ul>
+          </div>
+        </div>
+
+        <button class="btn-primary btn-big" onclick="App.goToDashboard()">
+          🏰 Ir a mi aventura
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA 4: DASHBOARD ===================== -->
+  <section id="screen-dashboard" class="screen">
+    <div class="dash-wrap">
+      <div class="dash-hero">
+        <div class="avatar-circle" id="dashAvatar">🦊</div>
+        <div class="dash-hero-info">
+          <h2 id="dashName">Estudiante</h2>
+          <span class="dash-level-pill" id="dashLevel">Nivel A1</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-ico">📈</div><b id="statXP">0</b><span>XP Total</span></div>
+        <div class="stat-card"><div class="stat-ico">📚</div><b id="statClasses">0</b><span>Clases</span></div>
+        <div class="stat-card"><div class="stat-ico">⭐</div><b id="statStars">0</b><span>Estrellas</span></div>
+        <div class="stat-card"><div class="stat-ico">🔥</div><b id="statStreak">0</b><span>Racha</span></div>
+      </div>
+
+      <div class="dash-section">
+        <h3>🎓 Tu clase de hoy (60 min)</h3>
+        <div id="todayClass" class="class-preview"></div>
+        <button class="btn-primary btn-big" onclick="ClassEngine.startTodayClass()">▶️ Empezar clase</button>
+      </div>
+
+      <div class="dash-section">
+        <h3>🏆 Logros</h3>
+        <div id="achievementsGrid" class="achievements-grid"></div>
+      </div>
+
+      <div class="dash-section">
+        <h3>📜 Historial</h3>
+        <div id="historyList" class="history-list"></div>
+      </div>
+
+      <button class="btn-ghost full" onclick="App.retakeTest()">🔄 Repetir evaluación</button>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA 5: CLASE ===================== -->
+  <section id="screen-class" class="screen">
+    <div class="class-container">
+      <div class="class-topbar">
+        <button class="btn-ghost" onclick="App.goToDashboard()">✕</button>
+        <h3 id="classTitle">Clase</h3>
+        <span class="block-timer" id="blockTimer">10:00</span>
+      </div>
+
+      <div class="class-steps" id="classSteps"></div>
+
+      <div id="classContent" class="class-content"></div>
+
+      <div class="class-footer">
+        <button id="classNextBtn" class="btn-primary btn-big" onclick="ClassEngine.nextBlock()">Continuar →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOAST / CONFETTI ===================== -->
+  <div id="toast" class="toast"></div>
+  <div id="confetti" class="confetti-layer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
